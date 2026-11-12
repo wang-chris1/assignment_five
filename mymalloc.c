@@ -77,7 +77,8 @@ static block_t *request_block(size_t size) {
     return NULL; // the increment would not fit in sbrk's intptr_t argument
   }
 
-  void *mem = sbrk((intptr_t) (BLOCK_SIZE + size));
+  intptr_t increment = (intptr_t) (BLOCK_SIZE + size);
+  void *mem = sbrk(increment);
   if (mem == (void *) -1) {
     return NULL;
   }
